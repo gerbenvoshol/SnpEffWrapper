@@ -42,7 +42,7 @@ def _java_version_ok(java):
   try:
     output = subprocess.check_output([java, '-Xmx10m', '-version'], stderr=subprocess.STDOUT)
     first_line = output.decode("utf-8").splitlines()[0]
-    match = re.match('^java version "1\.7\.[^"]+"$', first_line)
+    match = re.match('^openjdk', first_line)
     return match is not None
   except CalledProcessError: # Probably this java doesn't exist
     return False
