@@ -14,8 +14,8 @@ setup(name='snpEffWrapper',
       ],
       include_package_data=True,
       package_data={
-        'data': 'snpEffWrapper/data/*',
-        'test_data': 'snpEffWrapper/tests/data/*'
+        'data': ['snpEffWrapper/data/*'],
+        'test_data': ['snpEffWrapper/tests/data/*']
       },
       packages=find_packages(),
       zip_safe=False
