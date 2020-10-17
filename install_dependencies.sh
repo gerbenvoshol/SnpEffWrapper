@@ -5,7 +5,8 @@ set -e
 
 start_dir=$(pwd)
 
-SNPEFF_VERSION="v4_1l_core"
+#SNPEFF_VERSION="v4_1l_core"
+SNPEFF_VERSION="v4_3t_core"
 SNPEFF_DOWNLOAD_URL="http://sourceforge.net/projects/snpeff/files/snpEff_${SNPEFF_VERSION}.zip"
 
 # Make an install location
