@@ -330,6 +330,17 @@ def move_annotated_vcf(annotated_vcf, output_vcf):
                                                         output_vcf.name))
     shutil.move(annotated_vcf.name, output_vcf.name)
 
+def move_summary_csv(summary_csv, output_csv):
+  if output_csv is sys.stdout:
+    logger.info("Not dumping CSV to stdout")
+  else:
+    summary_csv.close()
+    output_csv.close()
+    logger.info("Moving Summary CSV from %s to %s" % (summary_csv.name+".csv",
+                                                        output_csv.name+".csv"))
+    shutil.move(summary_csv.name+".csv", output_csv.name+".csv")
+    
+    
 def delete_temp_database(temp_database_dir):
   logger.debug("Deleting temporary files from %s" % temp_database_dir)
   shutil.rmtree(temp_database_dir)
@@ -347,7 +358,7 @@ def annotate_vcf(args):
                              args.vcf_file, config_filename, args.debug)
   check_annotations(annotated_vcf)
   move_annotated_vcf(annotated_vcf, args.output_vcf)
-  move_annotated_vcf(annotated_vcf+".csv", args.output_vcf+".csv")
+  move_summary_csv(annotated_vcf, args.output_vcf)
   if args.keep:
     logging.info("You can find temporary files in '%s'", temp_database_dir)
   else:
