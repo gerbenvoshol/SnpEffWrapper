@@ -304,10 +304,12 @@ def check_annotations(annotated_vcf):
   modified_vcf = _remove_headers(annotated_vcf) # FIXME: A future version of PyVCF may be able to parse nasty headers
   vcf_reader = vcf.Reader(modified_vcf)
   for record in vcf_reader:
-    annotations = ','.join(record.INFO['ANN'])
-    counter_update = {error: 1 for error in error_map
-                      if error in annotations}
-    error_counter.update(counter_update)
+    try:
+      annotations = ','.join(record.INFO['ANN'])
+    except KeyError:
+      counter_update = {error: 1 for error in error_map
+                        if error in annotations}
+      error_counter.update(counter_update)
   for error, count in error_counter.items():
     logger.warn("%s instances of '%s': %s" % (count, error,
                                                error_map[error]))
