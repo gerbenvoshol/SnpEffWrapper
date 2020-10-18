@@ -229,6 +229,7 @@ def _snpeff_annotate(java_exec, snpeff_exec, vcf_filename, config_filename,
              snpeff_exec, "ann",
              "-nodownload", "-verbose",
              "-no-downstream","-no-intergenic","-no-intron","-no-upstream","-no-utr",
+             "-csvStats", output_file.name+".csv",
              "-stats", annotation_stats_file,
              "-c", config_filename,
              "data",
@@ -346,6 +347,7 @@ def annotate_vcf(args):
                              args.vcf_file, config_filename, args.debug)
   check_annotations(annotated_vcf)
   move_annotated_vcf(annotated_vcf, args.output_vcf)
+  move_annotated_vcf(annotated_vcf+".csv", args.output_vcf+".csv")
   if args.keep:
     logging.info("You can find temporary files in '%s'", temp_database_dir)
   else:
