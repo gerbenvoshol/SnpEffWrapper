@@ -1,9 +1,16 @@
 # SnpEffWrapper
 Takes a VCF and infers annotations and variant effects from a GFF using [SnpEff](http://snpeff.sourceforge.net/).
 
-[![Build Status](https://travis-ci.org/sanger-pathogens/SnpEffWrapper.svg?branch=master)](https://travis-ci.org/sanger-pathogens/SnpEffWrapper)  
-[![License: GPL v3](https://img.shields.io/badge/License-GPL%20v3-brightgreen.svg)](https://github.com/sanger-pathogens/SnpEffWrapper/blob/master/LICENSE)  
-[![codecov](https://codecov.io/gh/sanger-pathogens/SnpEffWrapper/branch/master/graph/badge.svg)](https://codecov.io/gh/sanger-pathogens/SnpEffWrapper)
+## Notes for the version on this fork
+It was forked from sanger-pathogens/SnpEffWrapper on October 2020 and adapted to answer a couple of personal analysis needs. 
+
+* Tested with python3
+* setup.py was edited so it actually installs with pip
+* The Java version check code was changed to match any openjdk version (realistic any recent version will work with SNPeff). Will probably complain if Oracle Java is used.
+* the version of SNPeff in the dependencies script was updated (to v4_3t_core)
+* the default command line of SNPeff in the wrapper was changed to match my personal needs. (I suggest you have a look at lines 231 and around on snpEffWrapper/wrapper.py to see if this matches your needs) 
+* changed code so it doesn't crash if variants don't have an annotation field
+* the SNPeff summary CSV is produced and kept 
 
 ## Content
   * [Introduction](#introduction)
