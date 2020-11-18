@@ -4,6 +4,14 @@ Takes a VCF and infers annotations and variant effects from a GFF using [SnpEff]
 ## Notes for the version on this fork
 It was forked from sanger-pathogens/SnpEffWrapper on October 2020 and adapted to answer a couple of personal analysis needs. 
 
+### Easy install
+A pre-built singularity container is available from SingularityHub and can easily be obtained on any maching that supports singularity containers by running:
+
+```
+singularity pull shub://afonsoguerra/SnpEffWrapper
+```
+
+### Exclusive features compared to original
 * Tested with python3
 * setup.py was edited so it actually installs with pip
 * The Java version check code was changed to match any openjdk version (realistic any recent version will work with SNPeff). Will probably complain if Oracle Java is used.
@@ -11,6 +19,10 @@ It was forked from sanger-pathogens/SnpEffWrapper on October 2020 and adapted to
 * the default command line of SNPeff in the wrapper was changed to match my personal needs. (I suggest you have a look at lines 231 and around on snpEffWrapper/wrapper.py to see if this matches your needs) 
 * changed code so it doesn't crash if variants don't have an annotation field
 * the SNPeff summary CSV is produced and kept 
+* added a Singularity recipe file for easy deployment
+* Added repo to SingularityHub 
+
+
 
 ## Content
   * [Introduction](#introduction)
