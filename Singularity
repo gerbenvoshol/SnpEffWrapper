@@ -7,7 +7,7 @@ From: python:3
 
 %post
     #This is based on debian buster...
-    apt-get update --fix-missing && apt-get install -y python-pip git openjdk-11-jdk
+    apt-get update --fix-missing && apt-get install -y python3-pip git openjdk-11-jdk
     cd /
     git clone --depth=50 --branch=master https://github.com/afonsoguerra/SnpEffWrapper.git sanger-pathogens/SnpEffWrapper
     cd sanger-pathogens/SnpEffWrapper
