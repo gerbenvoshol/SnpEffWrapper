@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 import multiprocessing
 
 setup(name='snpEffWrapper',
-      version='0.2.5',
+      version='0.2.6',
       scripts=[
         'scripts/snpEffBuildAndRun'
       ],

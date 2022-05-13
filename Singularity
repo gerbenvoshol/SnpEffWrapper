@@ -13,8 +13,10 @@ From: python:3
     cd sanger-pathogens/SnpEffWrapper
     bash install_dependencies.sh
     rm -rf /sanger-pathogens/SnpEffWrapper/build/clinEff/
-    rm -rf /sanger-pathogens/SnpEffWrapper/build/*.zip    
-    pip install /sanger-pathogens/SnpEffWrapper
+    rm -rf /sanger-pathogens/SnpEffWrapper/build/*.zip
+    python3 -m pip install setuptools==58
+    python3 -m pip install pyvcf
+    python3 -m pip install /sanger-pathogens/SnpEffWrapper
 
 %runscript
     #export SNPEFF_EXEC=/sanger-pathogens/SnpEffWrapper/build/snpEff_v4_1l_core/snpEff.jar

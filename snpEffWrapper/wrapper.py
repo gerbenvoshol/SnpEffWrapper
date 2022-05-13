@@ -5,7 +5,6 @@ import shutil
 import subprocess
 import sys
 import tempfile
-import unittest
 import vcf
 import yaml
 
