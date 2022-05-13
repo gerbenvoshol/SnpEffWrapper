@@ -2,9 +2,10 @@
 
 import argparse
 import logging
-import shutil
+#import shutil
 import sys
 
+sys.path.append('/sanger-pathogens/SnpEffWrapper/')
 from snpEffWrapper.wrapper import annotate_vcf, check_and_amend_executables
 
 def parse_arguments():
