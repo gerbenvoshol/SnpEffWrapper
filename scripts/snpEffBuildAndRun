@@ -5,7 +5,11 @@ import logging
 #import shutil
 import sys
 
-sys.path.append('/sanger-pathogens/SnpEffWrapper/')
+#Early morning hacks...
+#sys.path.append('/sanger-pathogens/SnpEffWrapper/')
+sys.path.append('/usr/local/lib/python3.10/site-packages/')
+sys.path.append('/usr/local/lib/python3.10/site-packages/vcf/')
+
 from snpEffWrapper.wrapper import annotate_vcf, check_and_amend_executables
 
 def parse_arguments():
