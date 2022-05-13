@@ -10,7 +10,7 @@ setup(name='snpEffWrapper',
       install_requires=[
         'setuptools==58',
         'Jinja2',
-        'PyVCF',
+        'PyVCF3',
         'PyYAML'
       ],
       include_package_data=True,

@@ -15,7 +15,7 @@ From: python:3
     rm -rf /sanger-pathogens/SnpEffWrapper/build/clinEff/
     rm -rf /sanger-pathogens/SnpEffWrapper/build/*.zip
     python3 -m pip install setuptools==58
-    python3 -m pip install pyvcf
+    python3 -m pip install pyvcf3
     python3 -m pip install /sanger-pathogens/SnpEffWrapper
 
 %runscript
