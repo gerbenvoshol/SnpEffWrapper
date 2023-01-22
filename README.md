@@ -104,7 +104,7 @@ optional arguments:
 
 ### Example usage
 ```
-$ snpEffBuildAndRun snpEffWrapper/tests/data/minimal.gff snpEffWrapper/tests/data/minimal.vcf -o minimal.annotated.vcf
+$ snpEffBuildAndRun snpEffWrapper/tests/data/minimal.gff snpEffWrapper/tests/data/minimal.vcf -o minimal.annotated.vcf --snpeff-exec /usr/local/bin/snpEff.jar --coding-table 'default: Standard'
 ```
 ### Alternative coding tables
 
