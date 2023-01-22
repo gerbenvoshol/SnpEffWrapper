@@ -316,7 +316,7 @@ def check_annotations(annotated_vcf):
     logger.warn("%s instances of '%s': %s" % (count, error,
                                                error_map[error]))
   if len(error_counter) > 0:
-    raise AnnotationError("There were problems during the annotation, please review the warnings for details")
+    logger.warn("There were problems during the annotation, please review the warnings for details")
 
 def move_annotated_vcf(annotated_vcf, output_vcf):
   if output_vcf is sys.stdout:
