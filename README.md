@@ -5,10 +5,10 @@ Takes a VCF and infers annotations and variant effects from a GFF using [SnpEff]
 It was forked from sanger-pathogens/SnpEffWrapper on October 2020 and adapted to answer a couple of personal analysis needs. 
 
 ### Easy install
-A pre-built singularity container is available from SingularityHub and can easily be obtained on any maching that supports singularity containers by running:
+A singularity recipe is available and can easily be used to obtain a singularity container by running:
 
 ```
-singularity pull shub://afonsoguerra/SnpEffWrapper
+sudo singularity build snpEff.sif snpEff.recipe 
 ```
 
 ### Exclusive features compared to original
