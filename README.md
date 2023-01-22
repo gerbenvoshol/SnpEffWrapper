@@ -131,6 +131,12 @@ NB you don't need curly brackets if you're only mapping one contig (or setting a
 * At least one of the contigs in the VCF must have annotation data in the GFF (you'll get warnings for each VCF config not in the GFF)
 * You cannot provide unknown coding tables (i.e. that can't be found in [config.template](snpEffWrapper/data/config.template))
 
+If your GFF does not contain the FASTA sequence you can add it to the GFF as follows:
+
+```
+bash -c "cat annotation.gff; echo '##FASTA' ; cat reference.fasta" > annotation_with_fasta.gff
+```
+
 ## License
 SnpEffWrapper is free software, licensed under [GPLv3](https://github.com/sanger-pathogens/snpeffwrapper/blob/master/LICENSE).
 
