@@ -1,0 +1,52 @@
+Bootstrap:docker
+From:alpine:3.17.1
+
+%environment
+    SNPEFF_VERSION=v4.3t
+
+%labels
+    Maintainer	gpvoshol@gmail.com
+
+%post
+    apk --update add wget curl build-base git ca-certificates openjdk8-jre unzip bash python3 py3-pip
+
+    # Temp dir for downloading and building stuff
+    TMPDIR=/build
+
+    mkdir $TMPDIR
+    cd $TMPDIR
+
+    # the installation directory of snpEff
+    INSTALLDIR=/usr/local/lib
+    BINDIR=/usr/local/bin
+
+    # Download snpEff version 5.1d
+    #wget -P $TMPDIR https://snpeff.blob.core.windows.net/versions/snpEff_v5_1d_core.zip
+    wget -P $TMPDIR http://sourceforge.net/projects/snpeff/files/snpEff_v4_3t_core.zip
+
+    # Unzip snpEff archive
+    ls $TMPDIR | xargs -i unzip "$TMPDIR/{}" -d $INSTALLDIR
+
+    echo "#!/bin/sh" > $BINDIR/snpEff
+
+    echo "java -jar $INSTALLDIR/snpEff/snpEff.jar \$*" >> $BINDIR/snpEff
+
+    cp -r $INSTALLDIR/snpEff/* $BINDIR/
+
+    chmod +x $BINDIR/snpEff
+
+    # snpEff needs a data directory to which it can write
+    # (Downloading reference genomes for example)
+    mkdir $INSTALLDIR/snpEff/data
+    chmod 777 -R $INSTALLDIR/snpEff/data
+
+    # Remove tmp snpEff directory
+    rm -rf $TMPDIR
+
+    #Clean up
+    rm -rf /var/cache/apk/*
+
+    cd /
+    rm -rf /build
+
+    pip3 install git+https://github.com/gerbenvoshol/SnpEffWrapper.git
