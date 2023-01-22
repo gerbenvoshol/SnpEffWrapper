@@ -296,6 +296,7 @@ def check_annotations(annotated_vcf):
   error_map = {
     'WARNING_REF_DOES_NOT_MATCH_GENOME': "The reference base in your VCF didn't match the base in the GFF. Are you sure you have the right reference?",
     'WARNING_SEQUENCE_NOT_AVAILABLE': "A reference sequence was not available in your GFF. Please check that a reference sequence is available for every contig in your VCF",
+    'WARNING_TRANSCRIPT_NO_START_CODON': "Start codon does not match any 'start' codon in the CodonTable. This usually indicates an error on the reference genome (or database) but could be also due to a misconfigured codon table for the genome.",
     'ERROR_CHROMOSOME_NOT_FOUND': "A contig in your VCF could not be found in your GFF. Are you sure that contigs use consitent names between your input data and the reference?",
     'ERROR_OUT_OF_CHROMOSOME_RANGE': "One of your variants appears to be in a position beyond the end of the reference sequence. That's really weird, please check that you reference sequence matches your input data"
   }
