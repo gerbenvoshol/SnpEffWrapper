@@ -85,7 +85,7 @@ def check_and_amend_executables(args):
 
 def parse_coding_table(coding_table_str):
   logger.debug('Parsing the coding table')
-  return yaml.load(coding_table_str)
+  return yaml.full_load(coding_table_str)
 
 def get_gff_contigs(gff_file):
   """Hacky gff parser to get contigs
