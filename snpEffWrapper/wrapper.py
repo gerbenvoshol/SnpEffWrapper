@@ -303,6 +303,7 @@ def check_annotations(annotated_vcf):
   annotated_vcf.seek(0)
   modified_vcf = _remove_headers(annotated_vcf) # FIXME: A future version of PyVCF may be able to parse nasty headers
   vcf_reader = vcf.Reader(modified_vcf)
+  annotations = ""
   for record in vcf_reader:
     try:
       annotations = ','.join(record.INFO['ANN'])
