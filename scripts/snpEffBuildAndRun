@@ -16,7 +16,7 @@ from snpEffWrapper.wrapper import annotate_vcf, check_and_amend_executables
 
 def parse_arguments():
     parser = argparse.ArgumentParser(
-        description="Takes a VCF and applies annotations from a GFF using SnpEff"
+        description="Takes a VCF and applies annotations from a GTF2.2/GFF3 using SnpEff"
     )
     parser.add_argument(
         "--snpeff-exec",
@@ -42,7 +42,7 @@ def parse_arguments():
     parser.add_argument(
         "vcf_file",
         type=argparse.FileType("r"),
-        help="VCF input to annotate (NB must be aligned to the reference in your GFF",
+        help="VCF input to annotate (NB must be aligned to the reference in your GTF/GFF",
     )
     parser.add_argument(
         "-o",
