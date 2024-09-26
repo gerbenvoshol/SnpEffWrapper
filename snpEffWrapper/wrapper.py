@@ -241,8 +241,8 @@ def create_config_file(temp_database_dir, genome_name, vcf_contigs, coding_table
 
 
 def _snpeff_build_database(java_exec, snpeff_exec, config_filename, annotation_file, stdout, stderr):
-    """Build the snpEff database, using -gff3 for GFF files and -gtf2 for GTF files"""
-    annotation_flag = "-gtf2" if _is_gtf(annotation_file.name) else "-gff3"
+    """Build the snpEff database, using -gff3 for GFF files and -gtf22 for GTF files"""
+    annotation_flag = "-gtf22" if _is_gtf(annotation_file.name) else "-gff3"
     command = [
         java_exec,
         "-Xmx4g",

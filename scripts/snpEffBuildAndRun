@@ -37,7 +37,7 @@ def parse_arguments():
     parser.add_argument(
         "annotation_file",
         type=argparse.FileType("r"),
-        help="GFF3/GTF2 with annotations including a reference genome sequence",
+        help="GFF3/GTF2.2 with annotations including a reference genome sequence",
     )
     parser.add_argument(
         "vcf_file",
