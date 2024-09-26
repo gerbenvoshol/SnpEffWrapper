@@ -211,12 +211,13 @@ def check_contigs(vcf_contigs, gff_contigs, coding_table):
 
 def create_temp_database(annotation_file):
     """Create a temporary database directory for snpEff"""
+    file_ext = "gtf" if _is_gtf(annotation_file.name) else "gff"
     database_dir = tempfile.mkdtemp(prefix="snpeff_data_dir_", dir=os.getcwd())
     logger.debug("Creating directory %s for temporary database" % database_dir)
     data_dir = os.path.join(database_dir, "data")
     logger.debug("data_dir: %s" % data_dir)
     os.makedirs(data_dir, mode=0o755)
-    shutil.copy(annotation_file.name, os.path.join(data_dir, "genes.annotation"))
+    shutil.copy(annotation_file.name, os.path.join(data_dir, f"genes.{file_ext}"))
     return database_dir
 
 
