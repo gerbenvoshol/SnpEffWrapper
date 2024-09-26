@@ -138,13 +138,13 @@ def get_vcf_contigs(vcf_file):
     return sorted(contigs)
 
 
-def check_contigs(vcf_contigs, gff_contigs, coding_table):
+def check_contigs(vcf_contigs, annotation_contigs, coding_table):
     """Check that contigs are consistent
 
     If any contig in the VCF isn't in the coding table, fail.
-    If not all of the VCF contigs are in the GFF, raise warnings.
-    If none of the VCF contigs are in the GFF, fail"""
-    logger.info("Checking that the VCF and GFF contigs are consistent")
+    If not all of the VCF contigs are in the GTF/GFF annotation file, raise warnings.
+    If none of the VCF contigs are in the annotation file, fail"""
+    logger.info("Checking that the VCF and GTF/GFF contigs are consistent")
 
     # Check the VCF contigs are consistent with the coding table
     missing_coding_tables = []
@@ -155,8 +155,8 @@ def check_contigs(vcf_contigs, gff_contigs, coding_table):
     for table in missing_coding_tables:
         logger.warn("Cannot annotate VCF, no coding table set for '%s'" % table)
 
-    # Check the VCF contigs are consistent with the GFF contigs
-    missing_contigs = [contig for contig in vcf_contigs if contig not in gff_contigs]
+    # Check the VCF contigs are consistent with the annotation contigs
+    missing_contigs = [contig for contig in vcf_contigs if contig not in annotation_contigs]
     for contig in missing_contigs:
         logger.warn("Could not annotate contig '%s', no annotation data" % contig)
 
@@ -371,10 +371,10 @@ def _remove_headers(annotated_vcf):
 def check_annotations(annotated_vcf):
     logger.info("Checking the annotated VCF for common issues")
     error_map = {
-        "WARNING_REF_DOES_NOT_MATCH_GENOME": "The reference base in your VCF didn't match the base in the GFF. Are you sure you have the right reference?",
-        "WARNING_SEQUENCE_NOT_AVAILABLE": "A reference sequence was not available in your GFF. Please check that a reference sequence is available for every contig in your VCF",
+        "WARNING_REF_DOES_NOT_MATCH_GENOME": "The reference base in your VCF didn't match the base in the annotation file. Are you sure you have the right reference?",
+        "WARNING_SEQUENCE_NOT_AVAILABLE": "A reference sequence was not available in your annotation file. Please check that a reference sequence is available for every contig in your VCF",
         "WARNING_TRANSCRIPT_NO_START_CODON": "Start codon does not match any 'start' codon in the CodonTable. This usually indicates an error on the reference genome (or database) but could be also due to a misconfigured codon table for the genome.",
-        "ERROR_CHROMOSOME_NOT_FOUND": "A contig in your VCF could not be found in your GFF. Are you sure that contigs use consitent names between your input data and the reference?",
+        "ERROR_CHROMOSOME_NOT_FOUND": "A contig in your VCF could not be found in your annotation file. Are you sure that contigs use consitent names between your input data and the reference?",
         "ERROR_OUT_OF_CHROMOSOME_RANGE": "One of your variants appears to be in a position beyond the end of the reference sequence. That's really weird, please check that you reference sequence matches your input data",
     }
     error_counter = Counter()
