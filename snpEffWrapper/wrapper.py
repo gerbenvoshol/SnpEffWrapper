@@ -331,12 +331,7 @@ def _get_snpeff_output_files(temp_database_dir, debug):
 
 
 def run_snpeff(temp_database_dir, java_exec, snpeff_exec, vcf_file, config_filename, debug):
-    (
-        temp_output_file,
-        build_stdout,
-        build_stderr,
-        annotate_stderr
-    ) = _get_snpeff_output_files(temp_database_dir, debug)
+    temp_output_file, build_stdout, build_stderr, annotate_stderr = _get_snpeff_output_files(temp_database_dir, debug)
     vcf_filename = vcf_file.name
     _snpeff_build_database(
         java_exec,
