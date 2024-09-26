@@ -330,13 +330,14 @@ def _get_snpeff_output_files(temp_database_dir, debug):
     return temp_output_file, build_stdout, build_stderr, annotate_stderr
 
 
-def run_snpeff(temp_database_dir, java_exec, snpeff_exec, vcf_file, config_filename, debug):
+def run_snpeff(temp_database_dir, java_exec, snpeff_exec, vcf_file, config_filename, debug, annotation_file):
     temp_output_file, build_stdout, build_stderr, annotate_stderr = _get_snpeff_output_files(temp_database_dir, debug)
     vcf_filename = vcf_file.name
     _snpeff_build_database(
         java_exec,
         snpeff_exec,
         config_filename,
+        annotation_file,
         build_stdout,
         build_stderr
     )
@@ -446,6 +447,7 @@ def annotate_vcf(args):
         args.vcf_file,
         config_filename,
         args.debug,
+        args.annotation_file
     )
     check_annotations(annotated_vcf)
     move_annotated_vcf(annotated_vcf, args.output_vcf)
