@@ -1,5 +1,5 @@
 # SnpEffWrapper
-Takes a VCF and infers annotations and variant effects from a GFF using [SnpEff](http://snpeff.sourceforge.net/).
+Takes a VCF and infers annotations and variant effects from a GTF2.2/GFF3 using [SnpEff](http://snpeff.sourceforge.net/).
 
 ## Notes for the version on this fork
 It was forked from sanger-pathogens/SnpEffWrapper on October 2020 and adapted to answer a couple of personal analysis needs. 
@@ -21,7 +21,7 @@ sudo singularity build snpEff.sif snpEff.recipe
 * the SNPeff summary CSV is produced and kept 
 * added a Singularity recipe file for easy deployment
 * Added repo to SingularityHub 
-
+* Added support for GTF2.2 files
 
 
 ## Content
@@ -37,7 +37,7 @@ sudo singularity build snpEff.sif snpEff.recipe
   * [Citation](#citation)
 
 ## Introduction
-SnpEff is a tool that annotates and predicts the effects of variants on genes. SnpEffWrapper takes a VCF and, using SnpEff, infers annotations and variation effects from a GFF. If you use SnpEffWrapper, please consider [citing SnpEff](http://snpeff.sourceforge.net/SnpEff.html#citing). This software is not endorsed in any respect by the original authors.
+SnpEff is a tool that annotates and predicts the effects of variants on genes. SnpEffWrapper takes a VCF and, using SnpEff, infers annotations and variation effects from a GTF or GFF file. If you use SnpEffWrapper, please consider [citing SnpEff](http://snpeff.sourceforge.net/SnpEff.html#citing). This software is not endorsed in any respect by the original authors.
 
 ## Installation
 SnpEffWrapper has the following dependencies:
@@ -69,13 +69,11 @@ usage: snpEffBuildAndRun [-h] [--snpeff-exec SNPEFF_EXEC]
                          [-o OUTPUT_VCF] [--debug] [--keep]
                          gff_file vcf_file
 
-Takes a VCF and applies annotations from a GFF using SnpEff
+Takes a VCF and applies annotations from a GTF2.2/GFF3 using SnpEff
 
 positional arguments:
-  gff_file              GFF with annotations including a reference genome
-                        sequence
-  vcf_file              VCF input to annotate (NB must be aligned to the
-                        reference in your GFF
+  annotation_file       GFF3/GTF2.2 with annotations including a reference genome sequence
+  vcf_file              VCF input to annotate (NB must be aligned to the reference in your GFF
 
 optional arguments:
   -h, --help            show this help message and exit
@@ -127,14 +125,17 @@ NB you don't need curly brackets if you're only mapping one contig (or setting a
 ### Input
 
 * The GFF must contain the reference sequence in Fasta format
-* The VCF must be aligned against the reference in the GFF
-* At least one of the contigs in the VCF must have annotation data in the GFF (you'll get warnings for each VCF config not in the GFF)
+* The VCF must be aligned against the reference in the GTF/GFF
+* At least one of the contigs in the VCF must have annotation data in the GTF/GFF (you'll get warnings for each VCF config not in the GTF/GFF)
 * You cannot provide unknown coding tables (i.e. that can't be found in [config.template](snpEffWrapper/data/config.template))
 
-If your GFF does not contain the FASTA sequence you can add it to the GFF as follows:
+If your GTF/GFF does not contain the FASTA sequence you can add it to the GTF/GFF as follows:
 
 ```
+# gff example
 bash -c "cat annotation.gff; echo '##FASTA' ; cat reference.fasta" > annotation_with_fasta.gff
+# gtf example
+bash -c "cat annotation.gtf; echo '##FASTA' ; cat reference.fasta" > annotation_with_fasta.gtf
 ```
 
 ## License

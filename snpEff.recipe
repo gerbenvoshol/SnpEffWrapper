@@ -49,4 +49,4 @@ From:alpine:3.17.1
     cd /
     rm -rf /build
 
-    pip3 install git+https://github.com/gerbenvoshol/SnpEffWrapper.git --use-pep517
+    pip3 install git+https://github.com/SergeWielhouwer/SnpEffWrapper.git --use-pep517

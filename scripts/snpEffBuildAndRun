@@ -2,49 +2,82 @@
 
 import argparse
 import logging
-#import shutil
+
+# import shutil
 import sys
 
-#Early morning hacks...
-#sys.path.append('/sanger-pathogens/SnpEffWrapper/')
-#sys.path.append('/usr/local/lib/python3.10/site-packages/')
-#sys.path.append('/usr/local/lib/python3.10/site-packages/vcf/')
+# Early morning hacks...
+# sys.path.append('/sanger-pathogens/SnpEffWrapper/')
+# sys.path.append('/usr/local/lib/python3.10/site-packages/')
+# sys.path.append('/usr/local/lib/python3.10/site-packages/vcf/')
 
 from snpEffWrapper.wrapper import annotate_vcf, check_and_amend_executables
 
-def parse_arguments():
-  parser = argparse.ArgumentParser(
-    description="Takes a VCF and applies annotations from a GFF using SnpEff"
-  )
-  parser.add_argument('--snpeff-exec', type=argparse.FileType('r'),
-                      help='Path to your prefered SnpEff executable (default: snpEff.jar)')
-  parser.add_argument('--java-exec', type=argparse.FileType('r'),
-                      help='Path to Java 1.7 (default: java)')
-  parser.add_argument('--coding-table', type=str,
-                      default='default: Bacterial_and_Plant_Plastid',
-                      help="A mapping of contig name to coding table formatted in YAML")
-  parser.add_argument('gff_file', type=argparse.FileType('r'),
-                      help="GFF with annotations including a reference genome sequence")
-  parser.add_argument('vcf_file', type=argparse.FileType('r'),
-                      help="VCF input to annotate (NB must be aligned to the reference in your GFF")
-  parser.add_argument('-o', '--output_vcf', type=argparse.FileType('w'),
-                      default=sys.stdout,
-                      help="Output for the annotated VCF (default: stdout)")
-  parser.add_argument('--debug', action='store_true', default=False,
-                      help="Show lots of SnpEff and other debug output")
-  parser.add_argument('--keep', action='store_true', default=False,
-                      help="Keep temporary files and databases (useful for debugging)")
-  args = parser.parse_args()
-  return args
 
-if __name__ == '__main__':
-  args = parse_arguments()
-  if args.debug:
-    logging.basicConfig(format="[%(asctime)s] %(levelname)s: %(message)s (%(pathname)s:%(lineno)d)",
-                        level=logging.DEBUG)
-  else:
-    logging.basicConfig(format="[%(asctime)s] %(levelname)s: %(message)s",
-                        level=logging.INFO)
-  logger = logging.getLogger('snpEffWrapper')
-  args = check_and_amend_executables(args)
-  annotate_vcf(args)
+def parse_arguments():
+    parser = argparse.ArgumentParser(
+        description="Takes a VCF and applies annotations from a GTF2.2/GFF3 using SnpEff"
+    )
+    parser.add_argument(
+        "--snpeff-exec",
+        type=argparse.FileType("r"),
+        help="Path to your prefered SnpEff executable (default: snpEff.jar)",
+    )
+    parser.add_argument(
+        "--java-exec",
+        type=argparse.FileType("r"),
+        help="Path to Java 1.7 (default: java)",
+    )
+    parser.add_argument(
+        "--coding-table",
+        type=str,
+        default="default: Bacterial_and_Plant_Plastid",
+        help="A mapping of contig name to coding table formatted in YAML",
+    )
+    parser.add_argument(
+        "annotation_file",
+        type=argparse.FileType("r"),
+        help="GFF3/GTF2.2 with annotations including a reference genome sequence",
+    )
+    parser.add_argument(
+        "vcf_file",
+        type=argparse.FileType("r"),
+        help="VCF input to annotate (NB must be aligned to the reference in your GTF/GFF",
+    )
+    parser.add_argument(
+        "-o",
+        "--output_vcf",
+        type=argparse.FileType("w"),
+        default=sys.stdout,
+        help="Output for the annotated VCF (default: stdout)",
+    )
+    parser.add_argument(
+        "--debug",
+        action="store_true",
+        default=False,
+        help="Show lots of SnpEff and other debug output",
+    )
+    parser.add_argument(
+        "--keep",
+        action="store_true",
+        default=False,
+        help="Keep temporary files and databases (useful for debugging)",
+    )
+    args = parser.parse_args()
+    return args
+
+
+if __name__ == "__main__":
+    args = parse_arguments()
+    if args.debug:
+        logging.basicConfig(
+            format="[%(asctime)s] %(levelname)s: %(message)s (%(pathname)s:%(lineno)d)",
+            level=logging.DEBUG,
+        )
+    else:
+        logging.basicConfig(
+            format="[%(asctime)s] %(levelname)s: %(message)s", level=logging.INFO
+        )
+    logger = logging.getLogger("snpEffWrapper")
+    args = check_and_amend_executables(args)
+    annotate_vcf(args)
